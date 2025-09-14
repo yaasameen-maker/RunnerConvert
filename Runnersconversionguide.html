@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kilometer to Mile Converter</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .converter-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 18px;
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+        }
+        /* Removes the default number input arrows on some browsers */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="converter-container">
+        <h1>Race Distance Converter</h1>
+        <div class="input-group">
+            <label for="kilometers">Kilometers (km)</label>
+            <input type="number" id="kilometers" placeholder="Enter kilometers..." oninput="convert('km')">
+        </div>
+        <div class="input-group">
+            <label for="miles">Miles (mi)</label>
+            <input type="number" id="miles" placeholder="Enter miles..." oninput="convert('mi')">
+        </div>
+    </div>
+
+    <script>
+        function convert(fromUnit) {
+            const kmInput = document.getElementById('kilometers');
+            const milesInput = document.getElementById('miles');
+
+            const kmToMilesFactor = 0.621371;
+            const milesToKmFactor = 1.60934;
+
+            if (fromUnit === 'km') {
+                const kilometers = parseFloat(kmInput.value);
+                if (isNaN(kilometers)) {
+                    milesInput.value = '';
+                } else {
+                    milesInput.value = (kilometers * kmToMilesFactor).toFixed(3);
+                }
+            } else if (fromUnit === 'mi') {
+                const miles = parseFloat(milesInput.value);
+                if (isNaN(miles)) {
+                    kmInput.value = '';
+                } else {
+                    kmInput.value = (miles * milesToKmFactor).toFixed(3);
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
